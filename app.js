@@ -10,14 +10,13 @@ const flash = require('connect-flash');
 const categoryRouter = require('./app/category/router');
 const dashboardRouter = require('./app/dashboard/router');
 const nominalRouter = require('./app/nominal/router');
+const voucherRouter = require('./app/voucher/router');
 
 const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
-app.use(cookieParser());
 
 app.use(
   session({
@@ -32,6 +31,7 @@ app.use(flash());
 
 app.use(methodOverride('_method'));
 app.use(logger('dev'));
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -40,6 +40,7 @@ app.use('/adminlte', express.static(path.join(__dirname, 'node_modules/admin-lte
 app.use('/', dashboardRouter);
 app.use('/category', categoryRouter);
 app.use('/nominal', nominalRouter);
+app.use('/voucher', voucherRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
