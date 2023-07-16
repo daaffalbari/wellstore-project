@@ -56,6 +56,8 @@ module.exports = {
       const category = await Category.findOne({ _id: id });
       res.render('admin/category/edit', {
         category,
+        title: 'Halaman Edit Kategori',
+        name: req.session.user.name,
       });
     } catch (error) {
       req.flash('alertMessage', `Error: ${error.message}`);
