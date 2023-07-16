@@ -14,6 +14,8 @@ module.exports = {
       res.render('admin/category/view_category', {
         category: category,
         alert: alert,
+        title: 'Halaman Kategori',
+        name: req.session.user.name,
       });
     } catch (error) {
       req.flash('alertMessage', `Error: ${error.message}`);
@@ -23,7 +25,10 @@ module.exports = {
   },
   viewCreate: async (req, res) => {
     try {
-      res.render('admin/category/create');
+      res.render('admin/category/create', {
+        title: 'Halaman Tambah Kategori',
+        name: req.session.user.name,
+      });
     } catch (error) {
       req.flash('alertMessage', `Error: ${error.message}`);
       req.flash('alertStatus', 'danger');
@@ -78,7 +83,6 @@ module.exports = {
     try {
       const { id } = req.params;
       const category = await Category.findOneAndRemove({ _id: id });
-
 
       req.flash('alertMessage', 'Berhasil menghapus data kategori');
       req.flash('alertStatus', 'success');

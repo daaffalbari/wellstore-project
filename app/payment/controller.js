@@ -13,6 +13,8 @@ module.exports = {
       res.render('admin/payment/view_payment', {
         payment,
         alert,
+        title: 'Halaman Payment',
+        name: req.session.user.name,
       });
     } catch (error) {
       req.flash('alertMessage', `Error: ${error.message}`);
@@ -25,6 +27,8 @@ module.exports = {
       const banks = await Bank.find();
       res.render('admin/payment/create', {
         banks,
+        title: 'Halaman Tambah Payment',
+        name: req.session.user.name,
       });
     } catch (error) {
       req.flash('alertMessage', `Error: ${error.message}`);
@@ -56,6 +60,8 @@ module.exports = {
       res.render('admin/payment/edit', {
         payment,
         banks,
+        title: 'Halaman Edit Payment',
+        name: req.session.user.name,
       });
     } catch (error) {
       req.flash('alertMessage', `Error: ${error.message}`);

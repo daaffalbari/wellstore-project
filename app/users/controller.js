@@ -59,5 +59,9 @@ module.exports = {
       req.flash('alertStatus', 'danger');
       res.redirect('/');
     }
-  },  
+  },
+  actionLogout: (req, res) => {
+    req.session.destroy();
+    res.redirect('/');
+  },
 };
