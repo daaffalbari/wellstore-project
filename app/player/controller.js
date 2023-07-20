@@ -30,4 +30,12 @@ module.exports = {
       res.status(500).json({ message: error.message || `Internal Server Error` });
     }
   },
+  category: async (req, res) => {
+    try {
+      const category = await Category.find();
+      res.status(200).json({ data: category });
+    } catch (error) {
+      res.status(500).json({ message: error.message || `Internal Server Error` });
+    }
+  }
 };
