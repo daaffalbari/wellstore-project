@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const bycrypt = require('bcryptjs');
+const HASH_ROUND = 10;
 
 let playerSchema = mongoose.Schema(
   {
@@ -61,5 +63,10 @@ playerSchema.path('email').validate(
   },
   (attr) => `${attr.value} sudah terdaftar`
 );
+
+playerSchema.pre('save', function (next) {
+  this.password = bycrypt.hashSync(this.password, HASH_ROUND);
+  next();
+});
 
 module.exports = mongoose.model('Player', playerSchema);
